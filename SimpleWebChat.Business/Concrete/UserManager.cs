@@ -1,6 +1,7 @@
 ﻿using SimpleWebChat.Business.Abstract;
 using SimpleWebChat.DataAccess.Abstract;
 using SimpleWebChat.Entities.Concrete;
+using SimpleWebChat.Entities.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -25,6 +26,12 @@ namespace SimpleWebChat.Business.Concrete
         public List<User> GetUserList()
         {
             return _userDal.GetList();
+        }
+
+        public User Login(UserForLoginDto userForLOginDto)
+        {
+            var userToCheck = _userDal.Get(i => i.Username == userForLOginDto.Username && i.Password == userForLOginDto.Password);
+            return userToCheck;
         }
     }
 }
