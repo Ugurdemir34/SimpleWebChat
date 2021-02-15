@@ -1,4 +1,4 @@
-﻿
+﻿@model SimpleWebChat.Entities.Dtos.UserForLoginDto
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_LoginLayout.cshtml";
@@ -21,19 +21,18 @@
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                 </div>
-                                <form class="user">
+                                <form asp-action="Index" asp-controller="Login">
                                     <div class="form-group">
-                                        <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address...">
+                                        <input type="text" class="form-control form-control-user" asp-for="Username" placeholder="Enter Username...">
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
+                                        <input type="password" class="form-control form-control-user" asp-for="Password" placeholder="Password">
                                     </div>
+
                                    
-                                    <a href="index.html" class="btn btn-primary btn-user btn-block">
-                                        Login
-                                    </a>
+                                    <button type="submit" class="btn btn-primary btn-user btn-block">Login</button>
                                     <hr>
-                                   
+                                    <p>@ViewData["mesaj"]</p>
                                 </form>
                                 <hr>
                                
