@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SimpleWebChat.DataAccess\SimpleWebChat.DataAccess.csproj" />
+    <ProjectReference Include="..\SimpleWebChat.Entities\SimpleWebChat.Entities.csproj" />
+  </ItemGroup>
+
+</Project>
