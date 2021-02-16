@@ -1,0 +1,73 @@
+﻿@model List<SimpleWebChat.Entities.Concrete.User>
+@{
+    ViewData["Title"] = "UserList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table  table-hover">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Surname</th>
+            <th scope="col">Email</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <tr>
+                <th scope="col">@(i + 1)</th>
+                <td>@Model[i].Name</td>
+                <td>@Model[i].Surname</td>
+                <td>@Model[i].Email</td>
+                <td><button class="btn btn-warning">Update</button></td>
+                <td><button class="btn btn-danger" id="@Model[i].Id">Delete</button></td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section ListScripts
+{
+    <script>
+        $(".table tbody").on("click", '.btn-danger', function (e) {
+            var id = this.id;
+            var data_table = $('.table tbody');
+            var row = $(this).parent().parent();
+
+            console.log("Tıklanan => " + id);
+            swal({
+                title: "Silmek İstediğinize Emin Misiniz ?",
+                text: "Bu işlem geri alınamaz !",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $.ajax({
+                            type: "GET",
+                            url: "/Home/DeleteUser?id=" + id,
+                            dataType: 'json',
+                            success: function (data) {
+                                swal("İşlem Başarılı !", "Kayıt Başarıyla Silindi", "success");
+                                row.fadeOut(1000, function () {
+                                });
+
+
+
+                            }
+                        });
+                    }
+                    else {
+                        console.log("Hayır");
+                    }
+                })
+
+
+        })
+    </script>
+}
