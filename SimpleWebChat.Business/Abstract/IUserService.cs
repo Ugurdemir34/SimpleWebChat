@@ -12,6 +12,6 @@ namespace SimpleWebChat.Business.Abstract
         void Add(User user);
         List<User> GetUserList();
         User Login(UserForLoginDto userForLOginDto);
-
+        void Delete(User user);
     }
 }

@@ -19,6 +19,13 @@ namespace SimpleWebChat.Business.Concrete
         {
             _userDal.Add(user);
         }
+
+        public void Delete(User user)
+        {
+            var userForDelete = _userDal.Get(i => i.Id == user.Id);
+            _userDal.Delete(userForDelete);
+        }
+
         public User GetById(int id)
         {
            return _userDal.Get(i => i.Id == id);
