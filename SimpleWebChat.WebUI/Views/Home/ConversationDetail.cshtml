@@ -1,0 +1,55 @@
+﻿@model List<SimpleWebChat.Entities.Dtos.UserFriendMessageListDto>
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    ViewData["Title"] = "ConversationDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>ConversationDetail</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 chat">
+            <div class="card">
+                <div class="card-body msg_card_body">
+                    @foreach (var item in Model)
+                    {
+                        var state = "msg_cotainer";
+                        var content = "justify-content-start";
+                        var time = "msg_time";
+                        @if (item.UserId == HttpContextAccessor.HttpContext.Session.GetInt32("userid"))
+                        {
+                            state = "msg_cotainer_send";
+                            content = "justify-content-end";
+                            time = "msg_time_send";
+                            <div class="d-flex @content mb-4">
+                                <div class="@state">
+                                    @item.MessageContent
+                                    <span class=" @time" style="color:black">@item.DeliveredDate.ToShortTimeString()</span>
+                                    &nbsp;
+                                </div>
+                                <div class="img_cont_msg">
+                                    <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="d-flex @content mb-4">
+                                <div class="img_cont_msg">
+                                    <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
+                                </div>
+                                <div class="@state">
+                                    @item.MessageContent
+                                    <span class=" @time" style="color:black">@item.DeliveredDate.ToShortTimeString()</span>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
