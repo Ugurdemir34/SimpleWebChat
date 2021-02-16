@@ -20,6 +20,6 @@ namespace SimpleWebChat.Entities.Concrete
         public string Email { get; set; }
         [Required]
         public string Password { get; set; }
-        public short IsAdmin { get; set; }
+        public bool IsAdmin { get; set; }
     }
 }
