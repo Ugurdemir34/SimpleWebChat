@@ -35,10 +35,10 @@
         <div class="bg-light border-right" id="sidebar-wrapper">
             <div class="sidebar-heading">Menu </div>
             <div class="list-group list-group-flush">
-                <a href="#" class="list-group-item list-group-item-action bg-light">Conversation</a>
+                <a asp-action="Conversation" asp-controller="Home" class="list-group-item list-group-item-action bg-light">Conversation</a>
                 <a asp-action="UserList" asp-controller="Home" class="list-group-item list-group-item-action bg-light">User List</a>
                 <a asp-action="NewUser" asp-controller="Home" class="list-group-item list-group-item-action bg-light">User Add</a>
-                <a href="#" class="list-group-item list-group-item-action bg-light">Logout</a>
+                <a asp-action="LogOut" asp-controller="Login" class="list-group-item list-group-item-action bg-light">Logout</a>
             </div>
         </div>
         <div class="pb-3 container">
@@ -69,5 +69,13 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     @RenderSection("Scripts", required: false)
     @RenderSection("ListScripts", required: false)
+    <script>
+        $(document).ready(function () {
+            $("#LoadSignIn").click(function () {
+                console.log("Tıklandı !");
+                $('.container.').load("/Home/GetViewComponent");
+            });
+        });
+    </script>
 </body>
 </html>
