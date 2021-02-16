@@ -1,0 +1,61 @@
+﻿@model SimpleWebChat.WebUI.Models.NewUserModel
+
+@{
+    ViewData["Title"] = "NewUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (ViewData["useraddmessage"] != null)
+{
+<div class="alert alert-success" role="alert">
+    @ViewData["useraddmessage"]
+</div>
+}
+
+<h4>Create User</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="NewUser" asp-controller="Home">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Username" class="control-label"></label>
+                <input asp-for="Username" class="form-control" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Surname" class="control-label"></label>
+                <input asp-for="Surname" class="form-control" />
+                <span asp-validation-for="Surname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-check">
+
+                <input asp-for="IsAdmin" type="checkbox" class="form-check-input" />
+                <label asp-for="IsAdmin" class="form-check-label"></label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
