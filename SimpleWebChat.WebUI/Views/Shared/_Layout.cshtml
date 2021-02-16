@@ -6,6 +6,7 @@
     <title>@ViewData["Title"] - SimpleWebChat.WebUI</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link href="~/sidebar/simple-sidebar.css" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -29,10 +30,25 @@
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+    <div class="d-flex" id="wrapper">
+
+        <div class="bg-light border-right" id="sidebar-wrapper">
+            <div class="sidebar-heading">Menu </div>
+            <div class="list-group list-group-flush">
+                <a href="#" class="list-group-item list-group-item-action bg-light">Conversation</a>
+                <a asp-action="UserList" asp-controller="Home" class="list-group-item list-group-item-action bg-light">User List</a>
+                <a href="#" class="list-group-item list-group-item-action bg-light">User Add</a>
+                <a href="#" class="list-group-item list-group-item-action bg-light">Logout</a>
+            </div>
+        </div>
+        <div class="pb-3 container">
+            &nbsp; <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
+
+            <div class="container m-3 p-3">
+                @RenderBody()
+            </div>
+
+        </div>
     </div>
 
     <footer class="border-top footer text-muted">
@@ -43,6 +59,15 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+    </script>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     @RenderSection("Scripts", required: false)
+    @RenderSection("ListScripts", required: false)
 </body>
 </html>
