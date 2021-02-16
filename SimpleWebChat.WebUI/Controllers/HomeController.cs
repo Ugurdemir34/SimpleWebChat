@@ -5,19 +5,31 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using SimpleWebChat.Business.Abstract;
 using SimpleWebChat.WebUI.Models;
 
 namespace SimpleWebChat.WebUI.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private IUserService _userService;
+
+        public HomeController(IUserService userService)
         {
-            _logger = logger;
+            _userService = userService;
         }
-
+        public IActionResult UserList()
+        {
+            var userList = _userService.GetUserList();
+            return View(userList);
+        }
+        public JsonResult DeleteUser(int id)
+        {
+            var user = _userService.GetById(id);
+            _userService.Delete(user);
+            return Json(0);
+        }
         public IActionResult Index()
         {
             return View();
