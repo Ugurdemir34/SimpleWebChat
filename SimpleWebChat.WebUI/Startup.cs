@@ -31,14 +31,14 @@ namespace SimpleWebChat.WebUI
         {
             services.ConfigureApplicationCookie(options =>
             {
-                options.LoginPath = "/Auth/Login";
+                options.LoginPath = "/Login/Index";
                 options.LogoutPath = "/Login/Logout";
                 options.AccessDeniedPath = "/Account/AccessDenied";
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
                 options.Cookie = new Microsoft.AspNetCore.Http.CookieBuilder
                 {
                     HttpOnly = true,
-                    Name = "Sinav.Cookie",
+                    Name = "Simple.Cookie",
                     Path = "/",
                     SameSite = SameSiteMode.Lax,
                     SecurePolicy = CookieSecurePolicy.SameAsRequest
@@ -47,15 +47,19 @@ namespace SimpleWebChat.WebUI
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
            .AddCookie(options =>
            {
-               options.LoginPath = "/Auth/Login/";
-               options.LogoutPath = "/Auth/Logout/";
+               options.LoginPath = "/Login/Index/";
+               options.LogoutPath = "/Login/Logout/";
                options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
            });
             services.AddControllersWithViews();
             services.AddSession();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
             services.AddScoped<IUserDal, EfUserDal>();
             services.AddScoped<IUserService, UserManager>();
+            services.AddScoped<IMessageDal, EfMessageDal>();
+            services.AddScoped<IMessageService, MessageManager>();
+
             services.AddDistributedMemoryCache();
             services.AddHttpContextAccessor();
 
