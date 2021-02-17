@@ -15,6 +15,12 @@ namespace SimpleWebChat.Business.Concrete
         {
             _messageDal = messageDal;
         }
+
+        public void Add(Message newMessage)
+        {
+            _messageDal.Add(newMessage);
+        }
+
         public List<UserFriendMessageListDto> GetMessages(int userid, int otheruserid)
         {
            return _messageDal.GetConversation(userid, otheruserid);

@@ -9,5 +9,6 @@ namespace SimpleWebChat.Business.Abstract
     public interface IMessageService
     {
         List<UserFriendMessageListDto> GetMessages(int userid,int otheruserid);
+        void Add(Message newMessage);
     }
 }
