@@ -10,7 +10,7 @@ namespace SimpleWebChat.DataAccess.Concrete.EntityFramework.Contexts
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=DESKTOP-D77PTSR\UGUR;Database=SimpleWebChat;Trusted_Connection=true");
+            optionsBuilder.UseSqlServer(@"Server=ugurdemir.database.windows.net;Database=SimpleWebChat;User ID=ugurdemir;Password=ugur2434./*+");
         }
         public DbSet<User> Users { get; set; }
         public DbSet<Message> Messages { get; set; }
