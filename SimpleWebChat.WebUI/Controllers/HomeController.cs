@@ -48,6 +48,8 @@ namespace SimpleWebChat.WebUI.Controllers
         {
             var model = _messageService.GetMessages(userid, otheruserid);
             _httpContextAccessor.HttpContext.Session.SetInt32("otheruserid", otheruserid);
+            _httpContextAccessor.HttpContext.Session.SetString("otherusername", _userService.GetUserNameById(otheruserid));
+            
             return View(model);
         }
         [HttpPost]
@@ -65,6 +67,28 @@ namespace SimpleWebChat.WebUI.Controllers
             _userService.Add(user);
             ViewData["useraddmessage"] = "New user added successfully";
             return View();
+        }
+        public IActionResult UserDetail(int userid)
+        {
+            var user = _userService.GetById(userid);
+            return View(user);
+        }
+        [HttpPost]
+        public IActionResult UserDetail(UpdateUserModel model)
+        {
+            var updatedModel = new User
+            {
+                Id = model.Id,
+                Email = model.Email,
+                IsAdmin = model.IsAdmin,
+                Name = model.Name,
+                Password = model.Password,
+                Surname = model.Surname,
+                Username = model.Username
+
+            };
+            _userService.Update(updatedModel);
+            return RedirectToAction("UserList");
         }
         public IActionResult Index()
         {
