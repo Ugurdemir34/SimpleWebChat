@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -7,6 +9,9 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link href="~/sidebar/simple-sidebar.css" rel="stylesheet">
+    <link href="~/login/vendor/fontawesome-free/css/all.css" rel="stylesheet" />
+    <script src="/signalr/hubs"></script>
+
 </head>
 <body>
     <header>
@@ -45,6 +50,7 @@
             &nbsp; <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
 
             <div class="container m-3 p-3">
+                <input type="hidden" name="userid" value="@HttpContextAccessor.HttpContext.Session.GetInt32("userid")" />
                 @RenderBody()
             </div>
 
@@ -59,6 +65,8 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/signalr/dist/browser/signalr.js"></script>
+    <script src="~/js/Chat.js" defer></script>
     <script>
         $("#menu-toggle").click(function (e) {
             e.preventDefault();
@@ -67,15 +75,10 @@
     </script>
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.7/signalr.min.js"></script>*@
     @RenderSection("Scripts", required: false)
     @RenderSection("ListScripts", required: false)
-    <script>
-        $(document).ready(function () {
-            $("#LoadSignIn").click(function () {
-                console.log("Tıklandı !");
-                $('.container.').load("/Home/GetViewComponent");
-            });
-        });
-    </script>
+    @RenderSection("ConversationScripts", required: false);
 </body>
 </html>
