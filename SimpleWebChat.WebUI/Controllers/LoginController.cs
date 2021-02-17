@@ -39,8 +39,10 @@ namespace SimpleWebChat.WebUI.Controllers
                 };
                 var userIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);
+               
                 _httpContextAccessor.HttpContext.Session.SetString("username", result.Username);
                 _httpContextAccessor.HttpContext.Session.SetInt32("userid", result.Id);
+                _httpContextAccessor.HttpContext.Session.SetString("isadmin", result.IsAdmin.ToString());
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
                 ViewData["mesaj"] = "";
                 return RedirectToAction("Index", "Home");
