@@ -13,11 +13,15 @@
         <div class="col-md-8 chat">
             <div class="card">
                 <div class="card-body msg_card_body">
+                    
+                    <input type="hidden" name="otheruserid" value="@HttpContextAccessor.HttpContext.Session.GetInt32("otheruserid")" />
+
                     @foreach (var item in Model)
                     {
                         var state = "msg_cotainer";
                         var content = "justify-content-start";
                         var time = "msg_time";
+
                         @if (item.UserId == HttpContextAccessor.HttpContext.Session.GetInt32("userid"))
                         {
                             state = "msg_cotainer_send";
@@ -29,17 +33,17 @@
                                     <span class=" @time" style="color:black">@item.DeliveredDate.ToShortTimeString()</span>
                                     &nbsp;
                                 </div>
-                                <div class="img_cont_msg">
+                                @*<div class="img_cont_msg">
                                     <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
-                                </div>
+                                </div>*@
                             </div>
                         }
                         else
                         {
                             <div class="d-flex @content mb-4">
-                                <div class="img_cont_msg">
+                                @*<div class="img_cont_msg">
                                     <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
-                                </div>
+                                </div>*@
                                 <div class="@state">
                                     @item.MessageContent
                                     <span class=" @time" style="color:black">@item.DeliveredDate.ToShortTimeString()</span>
@@ -48,8 +52,77 @@
                         }
                     }
                 </div>
+                <div class="card-footer">
+                    <div class="input-group">
+
+                        <textarea name="" class="form-control type_msg" placeholder="Type your message..."></textarea>
+                        <div class="input-group-append send_btn">
+                            <span class="input-group-text "><span class="fa fa-location-arrow"></span></span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+        @*<div class="col-md-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-2">User</div>
+                    <div class="col-4">
+                        <input type="text" id="txtUserName" class="form-control" />
+                    </div>
+                </div>
+                <div class="row">&nbsp;</div>
+                <div class="row">
+                    <div class="col-2">Message</div>
+                    <div class="col-4">
+                        <input type="text" id="txtMessage" class="form-control" />
+                    </div>
+                </div>
 
+                <div class="row">&nbsp;</div>
+                <div class="row">
+                    <div class="col-4">
+                        <input type="button" id="btnSend" value="Send Message" class="form-control" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <hr />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <ul id="messageList"></ul>
+                </div>
+            </div>
+
+        </div>*@
     </div>
 </div>
+@section ConversationScripts
+{
+    @*<script>
+            var connection = new signalR.HubConnectionBuilder()
+                .withUrl("https://localhost:44343/ChatHub").build();
+            connection.start().catch(err => console.error(err.toString()));
+            var userid = $('input:hidden[name=userid]').val();
+            connection.invoke("Connect",  userid)
+                .catch(error => console.log(error));
+            $(".send_btn").click(() => {
+                let date = new Date($.now());
+               var datetime = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()+ " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()
+                var otheruserid = $('input:hidden[name=otheruserid]').val();
+
+                console.log(userid);
+                console.log(otheruserid);
+                let message = $(".type_msg").val();
+
+                connection.invoke("SendMessage", datetime,message,userid,otheruserid)
+                    .catch(error => console.log(error));
+            });
+        </script>*@
+
+}
