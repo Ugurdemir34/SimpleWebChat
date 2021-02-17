@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - SimpleWebChat.WebUI</title>
+    <title> SimpleWebChat </title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link href="~/sidebar/simple-sidebar.css" rel="stylesheet">
@@ -17,7 +17,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">SimpleWebChat.WebUI</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Welcome @HttpContextAccessor.HttpContext.Session.GetString("username")</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -41,8 +41,12 @@
             <div class="sidebar-heading">Menu </div>
             <div class="list-group list-group-flush">
                 <a asp-action="Conversation" asp-controller="Home" class="list-group-item list-group-item-action bg-light">Conversation</a>
-                <a asp-action="UserList" asp-controller="Home" class="list-group-item list-group-item-action bg-light">User List</a>
-                <a asp-action="NewUser" asp-controller="Home" class="list-group-item list-group-item-action bg-light">User Add</a>
+                @if (HttpContextAccessor.HttpContext.Session.GetString("isadmin").ToLower() == "true")
+                {
+                    <a asp-action="UserList" asp-controller="Home" class="list-group-item list-group-item-action bg-light">User List</a>
+                    <a asp-action="NewUser" asp-controller="Home" class="list-group-item list-group-item-action bg-light">User Add</a>
+                }
+
                 <a asp-action="LogOut" asp-controller="Login" class="list-group-item list-group-item-action bg-light">Logout</a>
             </div>
         </div>
