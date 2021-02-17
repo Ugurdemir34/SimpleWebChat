@@ -8,10 +8,12 @@
 <ul class="list-group">
     @foreach (var item in Model)
     {
-        <li class="list-group-item justify-content-between wow fadeIn align-items-center mt-1" style="cursor:pointer">
+        if (item.Id != HttpContextAccessor.HttpContext.Session.GetInt32("userid"))
+        {
+            <li class="list-group-item justify-content-between wow fadeIn align-items-center mt-1" style="cursor:pointer">
 
-            <a asp-action="ConversationDetail" asp-controller="Home" asp-route-userid="@HttpContextAccessor.HttpContext.Session.GetInt32("userid")" asp-route-otheruserid="@item.Id"> @item.Name @item.Surname</a>
-        </li>
-
+                <a asp-action="ConversationDetail" asp-controller="Home" asp-route-userid="@HttpContextAccessor.HttpContext.Session.GetInt32("userid")" asp-route-otheruserid="@item.Id"> @item.Name @item.Surname</a>
+            </li>
+        }
     }
 </ul>
