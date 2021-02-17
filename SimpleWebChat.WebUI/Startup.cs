@@ -14,6 +14,7 @@ using SimpleWebChat.Business.Abstract;
 using SimpleWebChat.Business.Concrete;
 using SimpleWebChat.DataAccess.Abstract;
 using SimpleWebChat.DataAccess.Concrete.EntityFramework;
+using SimpleWebChat.WebUI.Hubs;
 
 namespace SimpleWebChat.WebUI
 {
@@ -59,7 +60,7 @@ namespace SimpleWebChat.WebUI
             services.AddScoped<IUserService, UserManager>();
             services.AddScoped<IMessageDal, EfMessageDal>();
             services.AddScoped<IMessageService, MessageManager>();
-
+            services.AddSignalR();
             services.AddDistributedMemoryCache();
             services.AddHttpContextAccessor();
 
@@ -86,12 +87,14 @@ namespace SimpleWebChat.WebUI
             app.UseRouting();
 
             app.UseAuthorization();
-
+           
+           
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Login}/{action=Index}/{id?}");
+                endpoints.MapHub<ChatHub>("/chathub");
             });
         }
     }
