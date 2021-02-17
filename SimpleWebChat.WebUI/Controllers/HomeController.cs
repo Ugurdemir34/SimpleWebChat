@@ -1,28 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using SimpleWebChat.Business.Abstract;
 using SimpleWebChat.Entities.Concrete;
 using SimpleWebChat.WebUI.Models;
 
 namespace SimpleWebChat.WebUI.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class HomeController : Controller
     {
 
         private IUserService _userService;
         private IMessageService _messageService;
+        private IHttpContextAccessor _httpContextAccessor;
 
-        public HomeController(IUserService userService,IMessageService messageService)
+        public HomeController(IUserService userService,IMessageService messageService, IHttpContextAccessor httpContextAccessor)
         {
             _userService = userService;
             _messageService = messageService;
+            _httpContextAccessor = httpContextAccessor;
         }
         public IActionResult UserList()
         {
@@ -49,6 +47,7 @@ namespace SimpleWebChat.WebUI.Controllers
         public IActionResult ConversationDetail(int userid,int otheruserid)
         {
             var model = _messageService.GetMessages(userid, otheruserid);
+            _httpContextAccessor.HttpContext.Session.SetInt32("otheruserid", otheruserid);
             return View(model);
         }
         [HttpPost]
