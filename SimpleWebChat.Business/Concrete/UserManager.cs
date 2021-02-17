@@ -35,10 +35,20 @@ namespace SimpleWebChat.Business.Concrete
             return _userDal.GetList();
         }
 
+        public string GetUserNameById(int id)
+        {
+           return  _userDal.Get(i => i.Id == id).Username;
+        }
+
         public User Login(UserForLoginDto userForLOginDto)
         {
             var userToCheck = _userDal.Get(i => i.Username == userForLOginDto.Username && i.Password == userForLOginDto.Password);
             return userToCheck;
+        }
+
+        public void Update(User user)
+        {
+            _userDal.Update(user);
         }
     }
 }

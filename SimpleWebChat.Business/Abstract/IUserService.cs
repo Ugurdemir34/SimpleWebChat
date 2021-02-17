@@ -13,5 +13,7 @@ namespace SimpleWebChat.Business.Abstract
         List<User> GetUserList();
         User Login(UserForLoginDto userForLOginDto);
         void Delete(User user);
+        string GetUserNameById(int id);
+        void Update(User user);
     }
 }
