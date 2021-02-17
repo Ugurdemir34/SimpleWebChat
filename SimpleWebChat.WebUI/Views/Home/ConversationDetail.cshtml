@@ -6,14 +6,15 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>ConversationDetail</h1>
+
 
 <div class="container">
     <div class="row">
         <div class="col-md-8 chat">
+            <h3 class="text-center">@HttpContextAccessor.HttpContext.Session.GetString("otherusername")</h3>
             <div class="card">
                 <div class="card-body msg_card_body">
-                    
+
                     <input type="hidden" name="otheruserid" value="@HttpContextAccessor.HttpContext.Session.GetInt32("otheruserid")" />
 
                     @foreach (var item in Model)
@@ -34,16 +35,16 @@
                                     &nbsp;
                                 </div>
                                 @*<div class="img_cont_msg">
-                                    <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
-                                </div>*@
+                                <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
+                            </div>*@
                             </div>
                         }
                         else
                         {
                             <div class="d-flex @content mb-4">
                                 @*<div class="img_cont_msg">
-                                    <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
-                                </div>*@
+                                <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
+                            </div>*@
                                 <div class="@state">
                                     @item.MessageContent
                                     <span class=" @time" style="color:black">@item.DeliveredDate.ToShortTimeString()</span>
