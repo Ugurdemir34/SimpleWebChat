@@ -5,15 +5,18 @@
     Layout = null;
 }
 <h4 class="text-center">Users</h4>
-<ul class="list-group">
+
+<ul class="list-group" id="menu">
     @foreach (var item in Model)
     {
         if (item.Id != HttpContextAccessor.HttpContext.Session.GetInt32("userid"))
         {
-            <li class="list-group-item justify-content-between wow fadeIn align-items-center mt-1" style="cursor:pointer">
+            <a asp-action="ConversationDetail" asp-controller="Home" asp-route-userid="@HttpContextAccessor.HttpContext.Session.GetInt32("userid")" asp-route-otheruserid="@item.Id">
+                <li class="list-group-item justify-content-between wow fadeIn align-items-center mt-1" style="cursor:pointer">
 
-                <a asp-action="ConversationDetail" asp-controller="Home" asp-route-userid="@HttpContextAccessor.HttpContext.Session.GetInt32("userid")" asp-route-otheruserid="@item.Id"> @item.Name @item.Surname</a>
-            </li>
+                    @item.Name @item.Surname
+                </li>
+            </a>
         }
     }
 </ul>
