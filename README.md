@@ -1,4 +1,4 @@
-# Mobixa Mülakat Projesi
+# Mobixa Değerlendirme Projesi
 
 ## Admin username : ugurdemir22
 ## Admin password : 123
