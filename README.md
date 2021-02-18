@@ -3,8 +3,11 @@
 ## Admin username : ugurdemir22
 ## Admin password : 123
 
+#### Yazılım Dili : C#
+#### Veritabanı : MSSQL
 #### Frontend Tarafı : Bootstrap
 #### Real Time : SignalR
+
 
 ### Çalışır örnek için [Tıklayınız. ](http://simplewebchat.azurewebsites.net)
 ![1](https://user-images.githubusercontent.com/42480609/108363693-49e44900-7206-11eb-88fe-9a495f43acca.PNG)
